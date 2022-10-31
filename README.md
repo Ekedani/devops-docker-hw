@@ -1,11 +1,11 @@
 # DevOps course docker homework
 
-This is a simple application created to show an example of containerization node.js app using Docker
+This is a simple application created to show an example of containerization node.js app using Docker. [Docker Hub repository](https://hub.docker.com/repository/docker/ekedani/devops-nodejs-app)
 
 ## Install
     docker build -t ekedani/devops-nodejs-app:1.0 .
 
-or if you want to pull from dockerhub:
+or if you want to pull from Docker hub:
 
     docker pull ekedani/devops-nodejs-app:1.0
     
