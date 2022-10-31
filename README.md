@@ -10,7 +10,7 @@ or if you want to pull from Docker hub:
     docker pull ekedani/devops-nodejs-app:1.1
     
 ## Run the app
-    docker run --name devops-nodejs --cpus="1" --memory="64M" -p 80:80 ekedani/devops-nodejs-app:1.1
+    docker run --rm --name devops-nodejs --cpus="1" --memory="64M" -p 80:80 ekedani/devops-nodejs-app:1.1
 Memory & CPUs parameters may be changed if needed. After that app will be running on localhost:80
     
 ## Available endpoints
