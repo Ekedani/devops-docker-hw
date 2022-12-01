@@ -1,4 +1,4 @@
-name: Linting & Pushing to DockerHub
+name: Lint & Push to DockerHub
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  linting:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,3 +26,26 @@ jobs:
         run: npm ci
       - name: Run linters
         run: npm run eslint
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build image
+        run: docker build -t ${{secrets.DOCKER_HUB_USERNAME}}/devops-nodejs-app:latest .
+  push:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          tags: ${{secrets.DOCKER_HUB_USERNAME}}/devops-nodejs-app:latest
+          push: true
