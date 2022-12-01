@@ -4,8 +4,13 @@
   "description": "A simple Node.js app created as homework for DevOps course",
   "main": "index.js",
   "scripts": {
+    "eslint": "eslint \"**/*.js\" --ignore-path .gitignore",
+    "eslint:fix": "eslint \"**/*.js\" --fix --ignore-path .gitignore",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ekedani",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.28.0"
+  }
 }
