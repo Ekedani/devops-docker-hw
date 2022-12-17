@@ -19,3 +19,14 @@ spec:
           name: nodejs-app
           ports:
             - containerPort: 80
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+          livenessProbe:
+            httpGet:
+              path: "/home"
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 3

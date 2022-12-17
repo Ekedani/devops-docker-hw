@@ -4,9 +4,10 @@ metadata:
   name: nodejs-app-service
   namespace: devops
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 80
       targetPort: 80
+      nodePort: 30128
   selector:
     app: nodejs-app
