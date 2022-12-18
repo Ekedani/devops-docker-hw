@@ -30,3 +30,22 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 3
+        - image: nginx:alpine
+          name: nginx-reverse-proxy
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: /etc/nginx
+              readOnly: true
+              name: nginx-conf
+            - mountPath: /var/log/nginx
+              name: log
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: nginx-conf
+            items:
+              - key: nginx.conf
+                path: nginx.conf
+        - name: log
+          emptyDir: { }

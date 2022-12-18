@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+  namespace: devops
+data:
+  nginx.conf: |
+    events {
+      worker_connections  1024;
+    }
+    http {
+      server {
+        listen 8080;
+        listen [::]:8080;
+        server_name localhost;
+      
+        location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+        }
+      
+        location /home {
+        proxy_pass http://localhost:80/home;
+        }
+      
+        location /favicon.ico {
+        proxy_pass http://localhost:80/favicon.ico;
+        }
+      
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+        root /usr/share/nginx/html;
+        }
+      }
+    }
+
